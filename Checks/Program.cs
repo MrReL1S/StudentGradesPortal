@@ -16,6 +16,9 @@ internal static class Program
         Check(logic.Summarize(records) == new GradeSummary(2, 3.5, 1, 1, 1), "summary");
         Check(logic.Summarize(Array.Empty<GradeRecord>()).Average == 0, "empty summary");
         Check(logic.Matches(a, GradeStatusFilter.Excellent, "иван"), "case insensitive search");
+        a.Comment = "Допущен к олимпиаде";
+        Check(logic.Matches(a, GradeStatusFilter.All, "олимпиаде")
+            && logic.Matches(a, GradeStatusFilter.All, "отлично"), "extended search fields");
         Check(logic.Matches(b, GradeStatusFilter.Failed, "") && !logic.Matches(a, GradeStatusFilter.Failed, ""), "failed filter");
         Check(logic.Matches(a, GradeStatusFilter.Passing, "") && !logic.Matches(b, GradeStatusFilter.Passing, ""), "passing filter");
         Check(logic.Matches(a, GradeStatusFilter.Final, "") && !logic.Matches(b, GradeStatusFilter.Final, ""), "final filter");
