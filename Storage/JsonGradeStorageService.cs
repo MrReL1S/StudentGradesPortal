@@ -41,9 +41,14 @@ public sealed class JsonGradeStorageService : IGradeStorageService
         var fullPath = Path.GetFullPath(_storagePath);
         Directory.CreateDirectory(Path.GetDirectoryName(fullPath)!);
         var temporaryPath = fullPath + ".tmp";
+        var backupPath = fullPath + ".bak";
         try
         {
             File.WriteAllText(temporaryPath, json);
+            if (File.Exists(fullPath))
+            {
+                File.Copy(fullPath, backupPath, true);
+            }
             File.Move(temporaryPath, fullPath, true);
         }
         finally { if (File.Exists(temporaryPath)) File.Delete(temporaryPath); }

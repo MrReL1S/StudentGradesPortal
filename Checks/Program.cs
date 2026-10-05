@@ -30,6 +30,7 @@ internal static class Program
             var loaded = storage.LoadRecords();
             Check(loaded.Count == 2 && loaded[0].Id == a.Id && loaded[0].StudentName == "Иван", "JSON roundtrip");
             storage.SaveRecords(Array.Empty<GradeRecord>());
+            Check(File.Exists(path + ".bak"), "backup before overwrite");
             Check(storage.LoadRecords().Count == 0, "empty journal persists");
             File.WriteAllText(path, "broken");
             bool rejected = false;
