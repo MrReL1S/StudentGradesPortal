@@ -14,9 +14,18 @@ public sealed class GradeAnalysisService : IGradeAnalysisService
             _ => true
         };
         if (!matches) return false;
-        if (string.IsNullOrWhiteSpace(search)) return true;
-        return new[] { record.StudentName, record.GroupName, record.Subject, record.WorkType }
-            .Any(value => value.Contains(search.Trim(), StringComparison.OrdinalIgnoreCase));
+        var normalizedSearch = NormalizeSearch(search);
+        if (normalizedSearch.Length == 0) return true;
+        return new[]
+            {
+                record.StudentName,
+                record.GroupName,
+                record.Subject,
+                record.WorkType,
+                record.Comment,
+                record.GradeLabel
+            }
+            .Any(value => value.Contains(normalizedSearch, StringComparison.OrdinalIgnoreCase));
     }
     public GradeSummary Summarize(IEnumerable<GradeRecord> records)
     {
@@ -26,4 +35,6 @@ public sealed class GradeAnalysisService : IGradeAnalysisService
     }
     public bool IsValid(string student, string group, string subject, string workType) =>
         new[] { student, group, subject, workType }.All(s => !string.IsNullOrWhiteSpace(s));
+
+    private static string NormalizeSearch(string search) => search.Trim();
 }
