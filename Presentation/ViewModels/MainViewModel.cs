@@ -20,7 +20,7 @@ public sealed class MainViewModel : ObservableObject
     private readonly ObservableCollection<GradeRecord> _records = new();
     private GradeStatusFilter _selectedFilter = GradeStatusFilter.All;
     private GradeRecord? _selectedRecord;
-    private string _statusMessage = "Журнал готов к работе";
+    private string _statusMessage = "Модули подключены, журнал готов к работе";
     private string _searchText = string.Empty;
 
     public MainViewModel(IGradeStorageService storageService, IGradeAnalysisService analysis)
@@ -74,6 +74,8 @@ public sealed class MainViewModel : ObservableObject
     public string[] GroupOptions { get; }
 
     public bool HasSelectedRecord => SelectedRecord is not null;
+
+    public int PassingCount => Math.Max(0, _summary.Total - _summary.Failed);
 
     public ICollectionView RecordsView { get; }
 
@@ -237,6 +239,7 @@ public sealed class MainViewModel : ObservableObject
         OnPropertyChanged(nameof(AverageGrade));
         OnPropertyChanged(nameof(ExcellentCount));
         OnPropertyChanged(nameof(FailedCount));
+        OnPropertyChanged(nameof(PassingCount));
         OnPropertyChanged(nameof(FinalCount));
         CommandManager.InvalidateRequerySuggested();
     }

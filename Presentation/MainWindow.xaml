@@ -72,7 +72,7 @@
                          Grid.Column="0"
                          Grid.ColumnSpan="2"
                          Margin="0,0,0,18"
-                         Columns="5">
+                         Columns="6">
                 <Border Margin="0,0,12,0"
                         Padding="16"
                         Background="{StaticResource SurfaceBrush}"
@@ -115,6 +115,17 @@
                                    Text="{Binding FailedCount}" />
                         <TextBlock Style="{StaticResource MetricLabelStyle}"
                                    Text="пересдач" />
+                    </StackPanel>
+                </Border>
+                <Border Margin="0,0,12,0"
+                        Padding="16"
+                        Background="{StaticResource SurfaceBrush}"
+                        CornerRadius="8">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource MetricValueStyle}"
+                                   Text="{Binding PassingCount}" />
+                        <TextBlock Style="{StaticResource MetricLabelStyle}"
+                                   Text="успешных" />
                     </StackPanel>
                 </Border>
                 <Border Padding="16"
