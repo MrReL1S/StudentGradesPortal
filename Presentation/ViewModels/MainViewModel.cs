@@ -20,7 +20,7 @@ public sealed class MainViewModel : ObservableObject
     private readonly ObservableCollection<GradeRecord> _records = new();
     private GradeStatusFilter _selectedFilter = GradeStatusFilter.All;
     private GradeRecord? _selectedRecord;
-    private string _statusMessage = "Журнал готов к работе";
+    private string _statusMessage = "Журнал загружен и готов к работе";
     private string _searchText = string.Empty;
 
     public MainViewModel(IGradeStorageService storageService, IGradeAnalysisService analysis)
