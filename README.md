@@ -20,3 +20,9 @@ dotnet run --project Checks\Checks.csproj
 ```
 
 The project targets .NET 9. The repository allows a newer installed SDK to build the solution when SDK 9.0.307 is not available.
+
+## Распределение задач команды
+
+- Чугрин И. Р.: Presentation, интеграция веток, настройка сборки и документация.
+- Таджидинов Д. Р.: Logic и Contracts, Storage, проверки правил и сохранения в Checks.
+- Совместно: согласование контрактов и приемка объединенной программы.

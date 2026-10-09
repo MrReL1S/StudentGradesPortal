@@ -32,8 +32,9 @@ internal static class Program
             storage.SaveRecords(records);
             var loaded = storage.LoadRecords();
             Check(loaded.Count == 2 && loaded[0].Id == a.Id && loaded[0].StudentName == "Иван", "JSON roundtrip");
+            var previousJson = File.ReadAllText(path);
             storage.SaveRecords(Array.Empty<GradeRecord>());
-            Check(File.Exists(path + ".bak"), "backup before overwrite");
+            Check(File.Exists(path + ".bak") && File.ReadAllText(path + ".bak") == previousJson, "backup preserves previous journal");
             Check(storage.LoadRecords().Count == 0, "empty journal persists");
             File.WriteAllText(path, "broken");
             bool rejected = false;
