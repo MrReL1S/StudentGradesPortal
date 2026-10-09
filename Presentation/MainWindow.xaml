@@ -46,7 +46,7 @@
                              Margin="0,0,12,0"
                              Style="{StaticResource InputTextBoxStyle}"
                              Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                             ToolTip="Поиск по студенту, группе, дисциплине и типу работы" />
+                             ToolTip="Поиск по студенту, группе, дисциплине, типу работы, комментарию и текстовой оценке" />
                     <Button Width="154"
                             Command="{Binding ClearFailedCommand}"
                             Content="Убрать пересдачи"
